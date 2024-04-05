@@ -10,6 +10,23 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 
+
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
+    clientToken: 'pub33f8f2d18197e40c6753e04645049746',
+    site: 'us5.datadoghq.com',
+    service: 'auth',
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 80,
+    trackUserInteractions: true,
+    trackResources: true,
+    trackLongTasks: true,
+    defaultPrivacyLevel: 'allow',
+});
+
+
 // Sign up function
 const signUp = () => {
     const email = document.getElementById("email").value;
@@ -21,6 +38,9 @@ const signUp = () => {
             // Signed in 
             document.write("You are Signed Up")
             console.log(result)
+            datadogRUM.setUser({
+                email: email
+            });
             // ...
         })
         .catch((error) => {
@@ -40,33 +60,12 @@ const signIn = () => {
             // Signed in 
             document.write("You are Signed In")
             console.log(result)
+            datadogRUM.setUser({
+                email: email
+            });
         })
         .catch((error) => {
             console.log(error.code);
             console.log(error.message)
         });
 }
-
-
-
-
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.init({
-    applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
-    clientToken: 'pub33f8f2d18197e40c6753e04645049746',
-    site: 'us5.datadoghq.com',
-    service: 'auth',
-    sessionSampleRate: 100,
-    sessionReplaySampleRate: 80,
-    trackUserInteractions: true,
-    trackResources: true,
-    trackLongTasks: true,
-    defaultPrivacyLevel: 'allow',
-});
-
-const userEmail = document.getElementById("email").value;
-datadogRum.setUser({
-    email: userEmail
-});
-

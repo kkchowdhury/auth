@@ -46,3 +46,27 @@ const signIn = () => {
             console.log(error.message)
         });
 }
+
+
+
+
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
+    clientToken: 'pub33f8f2d18197e40c6753e04645049746',
+    site: 'us5.datadoghq.com',
+    service: 'auth',
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 80,
+    trackUserInteractions: true,
+    trackResources: true,
+    trackLongTasks: true,
+    defaultPrivacyLevel: 'allow',
+});
+
+const userEmail = document.getElementById("email").value;
+datadogRum.setUser({
+    email: userEmail
+});
+

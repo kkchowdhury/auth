@@ -29,10 +29,13 @@
       defaultPrivacyLevel: 'allow',
       
     });
-     window.DD_RUM.setUser({
-        email: email ,
-    })
-  })
+    document.getElementById('submit-btn').addEventListener('click', function() {
+      var email = document.getElementById('email').value;
+      window.DD_RUM.setUser({
+        email: email,
+      });
+    });
+  });
 </script>
   </head>
   <body>

@@ -21,6 +21,7 @@ const signUp = () => {
             // Signed in 
             document.write("You are Signed Up")
             console.log(result)
+            window.userEmail = email;
             // ...
         })
         .catch((error) => {
@@ -40,6 +41,7 @@ const signIn = () => {
             // Signed in 
             document.write("You are Signed In")
             console.log(result)
+            window.userEmail = email;
         })
         .catch((error) => {
             console.log(error.code);

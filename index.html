@@ -69,8 +69,11 @@ const signIn = () => {
 
       window.DD_RUM.onReady(function() {
         //var userId = generateUniqueId(window.userEmail); 
-      const email = document.getElementById("email").value; 
-      var userId = generateUniqueId(email); 
+    var userId = localStorage.getItem('userId');
+  if (!userId) {
+    var email = document.getElementById('email').value; // Retrieve the email value
+    userId = generateUniqueUserId(email); // Pass the email value to generateUniqueUserId
+    localStorage.setItem('userId', userId);
         window.DD_RUM.init({
           clientToken: 'pub33f8f2d18197e40c6753e04645049746',
           applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
@@ -86,23 +89,22 @@ const signIn = () => {
 
         window.DD_RUM.setUser({
           id: userId,
-          //email: window.userEmail,
-          email: email,
         });
       });
 
       function generateUniqueId(email) {
-        let hash = 0, i, chr;
-        if (email.length === 0) return hash.toString(16);
-        for (i = 0; i < email.length; i++) {
-          const chr   = email.charCodeAt(i);
-          hash  = ((hash << 5) - hash) + chr;
-          hash |= 0; 
-        }
-        if (hash < 0) {
-          hash = hash >>> 0; 
-        }
-        return hash.toString(16);
+        // let hash = 0, i, chr;
+        // if (email.length === 0) return hash.toString(16);
+        // for (i = 0; i < email.length; i++) {
+        //   const chr   = email.charCodeAt(i);
+        //   hash  = ((hash << 5) - hash) + chr;
+        //   hash |= 0; 
+        // }
+        // if (hash < 0) {
+        //   hash = hash >>> 0; 
+        // }
+        // return hash.toString(16);
+         return 'user_' + email;
       }
     </script>
   </head>

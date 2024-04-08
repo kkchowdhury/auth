@@ -92,7 +92,6 @@ const signIn = () => {
       });
 
       function generateUniqueId(email) {
-        if (!email || email.length === 0) return '0';
         let hash = 0, i, chr;
         if (email.length === 0) return hash.toString(16);
         for (i = 0; i < email.length; i++) {

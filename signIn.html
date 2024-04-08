@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
     
     <script>// setting up firebase with our website
 const firebaseApp = firebase.initializeApp({
@@ -33,7 +33,7 @@ const signUp = () => {
             // Signed in 
             document.write("You are Signed Up")
             console.log(result)
-            window.userEmail = email;
+            //window.userEmail = email;
             // ...
         })
         .catch((error) => {
@@ -53,7 +53,7 @@ const signIn = () => {
             // Signed in 
             document.write("You are Signed In")
             console.log(result)
-            window.userEmail = email;
+            //window.userEmail = email;
         })
         .catch((error) => {
             console.log(error.code);
@@ -82,8 +82,8 @@ const signIn = () => {
       
     });
 window.DD_RUM.setUser({
-    id: generateUniqueId(window.userEmail),
-    email: window.userEmail,
+    id: generateUniqueId(email),
+    email: email,
 });
 function generateUniqueId(email) {
   let hash = 0, i, chr;

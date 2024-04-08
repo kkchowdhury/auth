@@ -30,9 +30,22 @@
       
     });
 window.DD_RUM.setUser({
+    id: generateUniqueId(window.userEmail),
     email: window.userEmail,
 });
-
+function generateUniqueId(email) {
+  let hash = 0, i, chr;
+  if (email.length === 0) return hash.toString(16);
+  for (i = 0; i < email.length; i++) {
+    const chr   = email.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; 
+  }
+  if (hash < 0) {
+    hash = hash >>> 0; 
+  }
+  return hash.toString(16);
+}
   });
 </script>
   </head>

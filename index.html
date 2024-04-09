@@ -26,6 +26,12 @@ function generateUniqueId(email) {
     return 'user_' + email;
 }
 
+    (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}};
+    d=o.createElement(u);d.async=1;d.src=n;
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n);
+})(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM');
+    
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         clientToken: 'pub33f8f2d18197e40c6753e04645049746',
@@ -79,13 +85,8 @@ const signIn = () => {
             console.log(error.message);
         });
 };
-</script>
-<script>
-(function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}};
-    d=o.createElement(u);d.async=1;d.src=n;
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n);
-})(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM');
+
+
 </script>
 </head>
 <body>

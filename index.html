@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign up</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
-    <script>
-    const firebaseApp = firebase.initializeApp({
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign up</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyDqzAnc8GWylzz917YuYwhLarbKku8LE2o",
     authDomain: "auth-f7501.firebaseapp.com",
     projectId: "auth-f7501",
@@ -20,87 +21,96 @@
 });
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
-function generateUniqueId(email) {return 'user_' + email;}
+
+function generateUniqueId(email) {
+    return 'user_' + email;
+}
+
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        clientToken: 'pub33f8f2d18197e40c6753e04645049746',
+        applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
+        site: 'us5.datadoghq.com',
+        service: 'auth',
+        sessionSampleRate: 100,
+        sessionReplaySampleRate: 80,
+        trackUserInteractions: true,
+        trackResources: true,
+        trackLongTasks: true,
+        defaultPrivacyLevel: 'allow'
+    });
+});
+
 const signUp = () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    console.log(email, password)
+    console.log(email, password);
     auth.createUserWithEmailAndPassword(email, password)
         .then((result) => {
-            document.write("You are Signed Up")
-            console.log(result)
+            document.write("You are Signed Up");
+            console.log(result);
+            const userId = generateUniqueId(email);
+            window.DD_RUM.setUser({
+                id: userId,
+                email: email
+            });
         })
         .catch((error) => {
             console.log(error.code);
-            console.log(error.message)
+            console.log(error.message);
         });
 };
+
 const signIn = () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     auth.signInWithEmailAndPassword(email, password)
-        .then((result) => { 
-            document.write("You are Signed In")
-            console.log(result)
+        .then((result) => {
+            document.write("You are Signed In");
+            console.log(result);
+            const userId = generateUniqueId(email);
+            window.DD_RUM.setUser({
+                id: userId,
+                email: email
+            });
         })
         .catch((error) => {
             console.log(error.code);
-            console.log(error.message)
+            console.log(error.message);
         });
 };
-    </script>
-    <script>
-   
-      (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM');
- window.DD_RUM.onReady(function() {
-   const email = document.getElementById("email").value;
-   const userId = generateUniqueId(email);
-        window.DD_RUM.init({
-          clientToken: 'pub33f8f2d18197e40c6753e04645049746',
-          applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
-          site: 'us5.datadoghq.com',
-          service: 'auth',
-          sessionSampleRate: 100,
-          sessionReplaySampleRate: 80,
-          trackUserInteractions: true,
-          trackResources: true,
-          trackLongTasks: true,
-          defaultPrivacyLevel: 'allow'
-        });
-        window.DD_RUM.setUser({
-          id: userId,
-          email:email,
-        });
-      });
-    </script>
-  </head>
-  <body>
-    <div class="form">
-      <div class="email">
+</script>
+<script>
+(function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}};
+    d=o.createElement(u);d.async=1;d.src=n;
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n);
+})(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM');
+</script>
+</head>
+<body>
+<div class="form">
+    <div class="email">
         <label for="email">Email</label>
         <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Write your email"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Write your email"
         />
-      </div>
-      <div class="pass">
+    </div>
+    <div class="pass">
         <label for="password">Password</label>
         <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="password"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
         />
-      </div>
-      <button id="submit-btn" onclick="signUp()">Sign Up</button>
-      <p>Already have an account ?</p>
-      <span><a href="signIn.html">Sign In</a></span>
     </div>
-  </body>
+    <button id="submit-btn" onclick="signUp()">Sign Up</button>
+    <p>Already have an account ?</p>
+    <span><a href="signIn.html">Sign In</a></span>
+</div>
+</body>
 </html>

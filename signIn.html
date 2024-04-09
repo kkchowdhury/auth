@@ -21,7 +21,7 @@ const firebaseApp = firebase.initializeApp({
 });
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
-
+function generateUniqueId(email) {return 'user_' + email; }
 // Sign up function
 const signUp = () => {
     const email = document.getElementById("email").value;
@@ -60,7 +60,7 @@ const signIn = () => {
             console.log(error.message)
         });
 }
-
+ var userId = generateUniqueId(email);
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n
@@ -69,8 +69,8 @@ const signIn = () => {
   window.DD_RUM.onReady(function(email) {
    // var userId = localStorage.getItem('userId');
   //if (!userId) {
-   var email = document.getElementById('email').value; // Retrieve the email value
-    var userId = generateUniqueId(email); // Pass the email value to generateUniqueUserId
+  // var email = document.getElementById('email').value; // Retrieve the email value
+    // Pass the email value to generateUniqueUserId
     //localStorage.setItem('userId', userId);  }
     window.DD_RUM.init({
       clientToken: 'pub33f8f2d18197e40c6753e04645049746',
@@ -90,20 +90,7 @@ window.DD_RUM.setUser({
   email: email,
   id: userId
 });
-function generateUniqueId(email) {
-  // let hash = 0, i, chr;
-  // if (email.length === 0) return hash.toString(16);
-  // for (i = 0; i < email.length; i++) {
-  //   const chr   = email.charCodeAt(i);
-  //   hash  = ((hash << 5) - hash) + chr;
-  //   hash |= 0; 
-  // }
-  // if (hash < 0) {
-  //   hash = hash >>> 0; 
-  // }
-  // return hash.toString(16);
-  return 'user_' + email;
-}
+
   });
 </script>
   </head>

@@ -27,7 +27,7 @@ const signUp = () => {
     const password = document.getElementById("password").value;
     console.log(email, password)
     // firebase code
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+    auth().createUserWithEmailAndPassword(email, password)
         .then((result) => {
             // Signed in 
             document.write("You are Signed Up")
@@ -40,14 +40,14 @@ const signUp = () => {
             console.log(error.message)
             // ..
         });
-}
+};
 
 // Sign In function
 const signIn = () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     // firebase code
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    auth().signInWithEmailAndPassword(email, password)
         .then((result) => {
             // Signed in 
             document.write("You are Signed In")
@@ -58,21 +58,20 @@ const signIn = () => {
             console.log(error.code);
             console.log(error.message)
         });
-}
-  </script>
-    <script>
+};
+  
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM');
 
-      window.DD_RUM.onReady(function(email) {
+      window.DD_RUM.onReady(function() {
         //var userId = generateUniqueId(window.userEmail); 
     //var userId = localStorage.getItem('userId');
   //if (!userId) {
-    //var email = document.getElementById('email').value; // Retrieve the email value
-    var userId = generateUniqueUserId(email); // Pass the email value to generateUniqueUserId
+    var email = document.getElementById('email').value; // Retrieve the email value
+    var userId = generateUniqueId(email); // Pass the email value to generateUniqueUserId
     //localStorage.setItem('userId', userId);
         window.DD_RUM.init({
           clientToken: 'pub33f8f2d18197e40c6753e04645049746',

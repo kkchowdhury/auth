@@ -9,7 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
-    <script>// setting up firebase with our website
+    <script>
     const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyDqzAnc8GWylzz917YuYwhLarbKku8LE2o",
     authDomain: "auth-f7501.firebaseapp.com",
@@ -21,58 +21,44 @@
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 function generateUniqueId(email) {return 'user_' + email;}
-// Sign up function
 const signUp = () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     console.log(email, password)
-    // firebase code
-    auth().createUserWithEmailAndPassword(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
         .then((result) => {
-            // Signed in 
             document.write("You are Signed Up")
             console.log(result)
-           // window.userEmail = email;
-            // ...
         })
         .catch((error) => {
             console.log(error.code);
             console.log(error.message)
-            // ..
         });
 };
-
-// Sign In function
 const signIn = () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    // firebase code
-    auth().signInWithEmailAndPassword(email, password)
-        .then((result) => {
-            // Signed in 
+    auth.signInWithEmailAndPassword(email, password)
+        .then((result) => { 
             document.write("You are Signed In")
             console.log(result)
-           // window.userEmail = email;
         })
         .catch((error) => {
             console.log(error.code);
             console.log(error.message)
         });
 };
-   var userId = generateUniqueId(email);
+    </script>
+    <script>
+   
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM');
-
-      window.DD_RUM.onReady(function() {
-        //var userId = generateUniqueId(window.userEmail); 
-    //var userId = localStorage.getItem('userId');
-  //if (!userId) {
-    //var email = document.getElementById('email').value; // Retrieve the email value
-    // Pass the email value to generateUniqueUserId
-    //localStorage.setItem('userId', userId);
+ window.DD_RUM.onReady(function() {
+   const email = document.getElementById("email").value;
+   const userId = generateUniqueId(email);
         window.DD_RUM.init({
           clientToken: 'pub33f8f2d18197e40c6753e04645049746',
           applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
@@ -85,19 +71,15 @@ const signIn = () => {
           trackLongTasks: true,
           defaultPrivacyLevel: 'allow'
         });
-
         window.DD_RUM.setUser({
           id: userId,
           email:email,
         });
       });
-
- 
     </script>
   </head>
   <body>
     <div class="form">
-      <!-- Email  -->
       <div class="email">
         <label for="email">Email</label>
         <input
@@ -107,7 +89,6 @@ const signIn = () => {
           placeholder="Write your email"
         />
       </div>
-      <!-- passWord -->
       <div class="pass">
         <label for="password">Password</label>
         <input
@@ -117,10 +98,7 @@ const signIn = () => {
           placeholder="password"
         />
       </div>
-
-      <!-- Sign Up button -->
       <button id="submit-btn" onclick="signUp()">Sign Up</button>
-      <!-- Sign In option -->
       <p>Already have an account ?</p>
       <span><a href="signIn.html">Sign In</a></span>
     </div>

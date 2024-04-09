@@ -22,7 +22,27 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 function generateUniqueId(email) { return 'user_' + email; }
-
+(function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+})(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM')
+window.DD_RUM.onReady(function() {
+    const email = document.getElementById('email').value; 
+    const userId = generateUniqueId(email);
+    window.DD_RUM.init({
+        clientToken: 'pub33f8f2d18197e40c6753e04645049746',
+        applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
+        site: 'us5.datadoghq.com',
+        service: 'auth',
+        sessionSampleRate: 100,
+        sessionReplaySampleRate: 80,
+        trackUserInteractions: true,
+        trackResources: true,
+        trackLongTasks: true,
+        defaultPrivacyLevel: 'allow',
+    });
+});
 const signUp = () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -66,30 +86,8 @@ const signIn = () => {
             console.log(error.message)
         });
 }
-</script>
 
-<script>
-(function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-})(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM')
-window.DD_RUM.onReady(function() {
-    const email = document.getElementById('email').value; 
-    const userId = generateUniqueId(email);
-    window.DD_RUM.init({
-        clientToken: 'pub33f8f2d18197e40c6753e04645049746',
-        applicationId: '5497fe57-a64c-4dda-8e73-999b2c3a8452',
-        site: 'us5.datadoghq.com',
-        service: 'auth',
-        sessionSampleRate: 100,
-        sessionReplaySampleRate: 80,
-        trackUserInteractions: true,
-        trackResources: true,
-        trackLongTasks: true,
-        defaultPrivacyLevel: 'allow',
-    });
-});
+
 </script>
 </head>
 <body>

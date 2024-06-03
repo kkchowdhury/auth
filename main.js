@@ -1,11 +1,11 @@
 // setting up firebase with our website
 const firebaseApp = firebase.initializeApp({
-    apiKey: "AIzaSyDqzAnc8GWylzz917YuYwhLarbKku8LE2o",
-    authDomain: "auth-f7501.firebaseapp.com",
-    projectId: "auth-f7501",
-    storageBucket: "auth-f7501.appspot.com",
-    messagingSenderId: "943960156531",
-    appId: "1:943960156531:web:c73716d97220860951fd06"
+  apiKey: "AIzaSyB1Jt59ceh7shODn8dEGRZ2TIHE-8U2-SA",
+  authDomain: "fir-auth-a11d7.firebaseapp.com",
+  projectId: "fir-auth-a11d7",
+  storageBucket: "fir-auth-a11d7.appspot.com",
+  messagingSenderId: "1037033269052",
+  appId: "1:1037033269052:web:b467f76fedf8c00588e039"
 });
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
